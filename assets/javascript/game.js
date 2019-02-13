@@ -77,7 +77,7 @@
             computerText.textContent = "Guess what letter I'm thinking of: ";// + computerChose;
           }
         } else {
-           alert("Please choose a letter from the alphabet");
+           //alert("Please choose a letter from the alphabet");
         }
       };
   //    alert('here4');
