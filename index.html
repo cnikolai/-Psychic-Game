@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Psychic Game</title>
+    <link rel="stylesheet" type="text/css" ref="assets/reset.css"/>
+    <link rel="stylesheet" type="text/css" ref="assets/style.css"/>
+    <!-- <script type="text/javascript" src="javascript/game.js"></script> -->
+</head>
+<body>
+    <h1>The Psychic Game</h1>
+    <br>
+    <div id="computer-text">Guess what letter I'm thinking of</div>
+    <br>
+    <div id="wins">Wins: </div>
+    <br>
+    <div id="losses">Losses: </div>
+    <br>
+    <div id="guesses-left">Guesses Left: <span id="guesses-left-num">9</span></div>
+    <br>
+    <div id="guesses-so-far">Your Guesses So Far: <span id="guesses-so-far-user"></span></div>
+
+    <script type="text/javascript">
+        // Let's start by grabbing a reference to the <span> below.
+      var computerText = document.getElementById("computer-text");
+      var guessessofarText = document.getElementById("guesses-so-far");
+      var guessessofaruserText = document.getElementById("guesses-so-far-user");
+      var guessesleftText = document.getElementById("guesses-left");
+      var guessesleftnumText = document.getElementById("guesses-left-num");
+      var winsText = document.getElementById("wins");
+      var lossesText = document.getElementById("losses");
+      var guessesleft = 9;
+      var wins = 0;
+      var losses = 0;
+      var userChose = "";
+      var computerChose = "";
+      var letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q"
+    ,"r","s","t","u","v","w","x","y","z"];
+
+
+      //computer chooses a letter
+      computerChose = letters[Math.floor(Math.random() * letters.length)+1];
+
+      // Next, we give JavaScript a function to execute when onkeyup event fires.
+      document.onkeyup = function(event) {    
+        //which letter did the user chooose
+        //allow for upper case letters too
+        userChose = event.key.toLowerCase();
+
+        //initialize the game
+        computerText.textContent = "Guess what letter I'm thinking of: " + computerChose;
+        guessesleftnumText.textContent = 9;
+        //guessessofarText.textContent = userChose;
+
+        
+
+        //user chose a lower case letter from the alphabet
+        if (letters.indexOf(userChose) != -1) {
+            //the user guesses correctly (wins)
+          if (userChose === computerChose) {
+            wins++;
+            guessessofaruserText.textContent = "";
+            mySpan = document.createElement("span");
+            mySpan.setAttribute("id","guesses-so-far-user")
+            guessessofarText.appendChild(mySpan);
+            winsText.textContent = "Wins: "+ wins;
+            guessesleft = 9;
+            guessesleftText.textContent = "Guesses Left: ";
+            var mySpan = document.createElement("span");
+            mySpan.setAttribute("id","guesses-left-num")
+            mySpan.textContent = "9";
+            guessesleftText.appendChild(mySpan); 
+            //computer chooses a letter
+            computerChose = letters[Math.floor(Math.random() * letters.length)+1];
+          } //the user still have guesses left
+          else if (guessesleft > 1) {
+            guessesleft--;
+            console.log("guesses left in if: " + guessesleft);
+            guessesleftnumText = document.getElementById("guesses-left-num");
+            guessesleftnumText.textContent = guessesleft;
+            guessessofaruserText = document.getElementById("guesses-so-far-user");
+            guessessofaruserText.textContent = guessessofaruserText.textContent + "," + userChose;
+          } 
+          else {
+            //the user used up all of his guesses and lost the game
+            console.log("guesses left in else: " + guessesleft);
+            losses++;
+            lossesText.textContent = "Losses: " + losses;
+            guessesleft = 9;
+            guessesleftText.textContent = "Guesses Left: ";
+            var mySpan = document.createElement("span");
+            mySpan.setAttribute("id","guesses-left-num")
+            mySpan.textContent = "9";
+            guessesleftText.appendChild(mySpan);
+            guessessofarText.textContent = "Your Guesses So Far: ";
+            mySpan = document.createElement("span");
+            mySpan.setAttribute("id","guesses-so-far-user")
+            guessessofarText.appendChild(mySpan);
+            //computer chooses a letter
+            computerChose = letters[Math.floor(Math.random() * letters.length)+1];
+          }
+        } else {
+           alert("Please choose a letter from the alphabet");
+        }
+      };
+    </script>
+</body>
+</html>
