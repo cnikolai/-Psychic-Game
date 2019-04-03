@@ -13,7 +13,6 @@
       var computerChose = "";
       var letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 
-      //alert('here2');
 
       //computer chooses a letter
       computerChose = letters[Math.floor(Math.random() * letters.length)+1];
@@ -27,7 +26,7 @@
 
         //initialize the game
         computerText.textContent = "Guess what letter I'm thinking of: ";// + computerChose;
-        guessesleftnumText.textContent = 9;
+        guessesleftnumText.textContent = 12;
 
         //user chose a lower case letter from the alphabet
         if (letters.indexOf(userChose) != -1) {
@@ -39,11 +38,11 @@
             mySpan.setAttribute("id","guesses-so-far-user")
             guessessofarText.appendChild(mySpan);
             winsText.textContent = "Wins: "+ wins;
-            guessesleft = 9;
+            guessesleft = 12;
             guessesleftText.textContent = "Guesses Left: ";
             var mySpan = document.createElement("span");
             mySpan.setAttribute("id","guesses-left-num")
-            mySpan.textContent = "9";
+            mySpan.textContent = "12";
             guessesleftText.appendChild(mySpan); 
             //computer chooses a letter
             computerChose = letters[Math.floor(Math.random() * letters.length)+1];
